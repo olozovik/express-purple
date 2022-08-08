@@ -3,7 +3,7 @@ import { App } from './app';
 import { ExceptionFilter } from './errors/exception.filter';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ILogger } from './logger/logger.interface';
-import { LoggerService } from './logger/logger.service.js';
+import { LoggerService } from './logger/logger.service';
 import { TYPES } from './types';
 import { UserController } from './users/users.controller';
 import { IUserController } from './users/users.controller.interface';
