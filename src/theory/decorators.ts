@@ -1,52 +1,58 @@
-const Component = (id: number) => {
-  console.log('init component');
-  return (target: Function) => {
-    console.log('run component');
-    target.prototype.id = 1;
-  };
+type DecoratorReturnType = (target: Function) => void;
+
+const Component = (id: number): DecoratorReturnType => {
+    console.log('init component');
+    return (target: Function) => {
+        console.log('run component');
+        target.prototype.id = 1;
+    };
 };
 
-const Logger = () => {
-  console.log('init logger');
-  return (target: Function) => {
-    console.log('run logger');
-  };
+const Logger = (): DecoratorReturnType => {
+    console.log('init logger');
+    return (target: Function) => {
+        console.log('run logger');
+    };
 };
 
-const Method = (target: Object, propertyKey: string, propertyDescriptor: PropertyDescriptor) => {
-  propertyDescriptor.value = (...args: any[]) => {
-    return args[0] * 10;
-  };
+const Method = (
+    target: Object,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor,
+): void => {
+    propertyDescriptor.value = (...args: any[]): number => {
+        return args[0] * 10;
+    };
 };
 
-const Prop = (target: Object, propertyKey: string) => {
-  let value: number;
-  const getter = () => {
-    console.log('Get');
-    return value;
-  };
-  const setter = (newValue: number) => {
-    console.log('Set');
-    value = newValue;
-  };
+const Prop = (target: Object, propertyKey: string): void => {
+    let value: number;
+    const getter = (): number => {
+        console.log('Get');
+        return value;
+    };
+    const setter = (newValue: number): void => {
+        console.log('Set');
+        value = newValue;
+    };
 
-  Object.defineProperty(target, propertyKey, { get: getter, set: setter });
+    Object.defineProperty(target, propertyKey, { get: getter, set: setter });
 };
 
-const Param = (target: Object, propertyKey: string, index: number) => {
-  console.log(propertyKey, index);
+const Param = (target: Object, propertyKey: string, index: number): void => {
+    console.log(propertyKey, index);
 };
 
 @Logger()
 @Component(1)
 export class User {
-  @Prop id: number;
+    @Prop id: number;
 
-  @Method
-  updateId(@Param newID: number) {
-    this.id = newID;
-    return this.id;
-  }
+    @Method
+    updateId(@Param newID: number): number {
+        this.id = newID;
+        return this.id;
+    }
 }
 
 console.log(new User().id);
