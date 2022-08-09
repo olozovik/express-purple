@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node ./dist/main.js",
     "dev": "nodemon",
+    "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9229 -r ts-node/register src/main.ts",
+    "inspect": "nodemon -e ts,json --exec node --inspect=localhost:9229 -r ts-node/register ./src/main.ts",
     "ts": "tsc -w",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
