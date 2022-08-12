@@ -3,7 +3,6 @@ import { injectable } from 'inversify';
 import { ILogger } from '../logger/logger.interface';
 import { IControllerRoute, RouteReturnType } from './route.interface';
 export { Router } from 'express';
-import 'reflect-metadata';
 
 @injectable()
 export abstract class BaseController {
