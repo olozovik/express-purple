@@ -33,11 +33,7 @@ export class UserService implements IUserService {
         if (!existedUser) {
             return false;
         }
-        const reqUser = new User(email);
-        const isValidPassword = await reqUser.comparePassword(password, existedUser.password);
-        if (!isValidPassword) {
-            return false;
-        }
-        return true;
+        const reqUser = new User(existedUser.email, existedUser.name, existedUser.password);
+        return await reqUser.comparePassword(password);
     }
 }

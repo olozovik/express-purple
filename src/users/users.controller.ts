@@ -42,7 +42,7 @@ export class UserController extends BaseController implements IUserController {
         if (!user) {
             return next(new HTTPError(401, 'Authorization error'));
         }
-        this.ok(res, `${body.email} is logged`);
+        this.ok(res, 'User is logged');
     }
 
     async register(
