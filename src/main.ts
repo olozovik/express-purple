@@ -14,6 +14,7 @@ import { IConfigService } from './config/config.service.interface';
 import { PrismaService } from './database/prisma.service';
 import { UsersRepository } from './users/users.repository';
 import { IUsersRepository } from './users/users.repository.interface';
+import { AuthMiddleware } from './common/auth.middleware';
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
@@ -23,6 +24,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
     bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
     bind<IUsersRepository>(TYPES.IUsersRepository).to(UsersRepository).inSingletonScope();
+    bind<AuthMiddleware>(TYPES.AuthMiddleware).to(AuthMiddleware);
     bind<App>(TYPES.Application).to(App);
 });
 

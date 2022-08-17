@@ -25,6 +25,10 @@ export abstract class BaseController {
         return this.send(res, 200, message);
     }
 
+    public okCreate<T>(res: Response, message: T): RouteReturnType {
+        return this.send(res, 201, message);
+    }
+
     protected bindRoutes(routes: IControllerRoute[]): void {
         for (const route of routes) {
             this.logger.log(`[${route.method}] ${route.path}`);

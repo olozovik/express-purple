@@ -8,6 +8,7 @@ import { UserController } from './users/users.controller';
 import { IConfigService } from './config/config.service.interface';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { PrismaService } from './database/prisma.service';
+import { AuthMiddleware } from './common/auth.middleware';
 
 @injectable()
 export class App {
@@ -21,6 +22,7 @@ export class App {
         @inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
         @inject(TYPES.IConfigService) private configService: IConfigService,
         @inject(TYPES.PrismaService) private prismaService: PrismaService,
+        @inject(TYPES.AuthMiddleware) private authMiddleware: AuthMiddleware,
     ) {
         this.app = express();
         this.port = 8000;
@@ -28,6 +30,7 @@ export class App {
 
     useMiddleware(): void {
         this.app.use(express.json());
+        this.app.use(this.authMiddleware.execute.bind(this.authMiddleware));
     }
 
     useRoutes(): void {
