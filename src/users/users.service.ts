@@ -1,4 +1,4 @@
-import { IUserService } from './user.service.interface';
+import { IUsersService } from './users.service.interface';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { User } from './user.entity';
@@ -9,7 +9,7 @@ import { IUsersRepository } from './users.repository.interface';
 import { UserModel } from '@prisma/client';
 
 @injectable()
-export class UserService implements IUserService {
+export class UsersService implements IUsersService {
     constructor(
         @inject(TYPES.IConfigService) private configService: IConfigService,
         @inject(TYPES.IUsersRepository) private usersRepository: IUsersRepository,

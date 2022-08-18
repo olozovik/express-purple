@@ -4,20 +4,20 @@ import { HTTPError } from '../errors/http-error.class';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
-import { IUserController } from './users.controller.interface';
+import { IUsersController } from './users.controller.interface';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
-import { IUserService } from './user.service.interface';
+import { IUsersService } from './users.service.interface';
 import { ValidateMiddleware } from '../common/validate.middleware';
 import { sign } from 'jsonwebtoken';
 import { IConfigService } from '../config/config.service.interface';
 import { AuthGuard } from '../common/auth.guard';
 
 @injectable()
-export class UserController extends BaseController implements IUserController {
+export class UsersController extends BaseController implements IUsersController {
     constructor(
         @inject(TYPES.ILogger) private loggerService: ILogger,
-        @inject(TYPES.IUserService) private userService: IUserService,
+        @inject(TYPES.IUsersService) private userService: IUsersService,
         @inject(TYPES.IConfigService) private configService: IConfigService,
     ) {
         super(loggerService);

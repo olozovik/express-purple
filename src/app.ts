@@ -4,7 +4,7 @@ import { inject, injectable } from 'inversify';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
 import 'reflect-metadata';
-import { UserController } from './users/users.controller';
+import { UsersController } from './users/users.controller';
 import { IConfigService } from './config/config.service.interface';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { PrismaService } from './database/prisma.service';
@@ -18,7 +18,7 @@ export class App {
 
     constructor(
         @inject(TYPES.ILogger) private logger: ILogger,
-        @inject(TYPES.IUserController) private userController: UserController,
+        @inject(TYPES.IUsersController) private userController: UsersController,
         @inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
         @inject(TYPES.IConfigService) private configService: IConfigService,
         @inject(TYPES.PrismaService) private prismaService: PrismaService,
